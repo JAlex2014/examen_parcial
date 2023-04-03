@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-ws$5a@cs!tcj_ud8st81oenr+5g)$negc$xl1iu%@8cyn7i*3m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'gestion_tienda',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
