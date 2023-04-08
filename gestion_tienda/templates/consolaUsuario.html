@@ -13,29 +13,67 @@
               referrerpolicy="no-referrer" />
     </head>
     <body>
-        <nav class="navbar navbar-light bg-dark">
-            <div class="d-flex align-items-start">
-                <a  class="navbar-brand text-white p-2"
-                style="font-family: monospace, monospace;" 
-                href="#">
-                <img    src="{% static 'Bootstraplogo.png' %}" 
-                        width="30" 
-                        height="30" 
-                        class="d-inline-block align-top" alt="">
-                TIENDA
-                </a>
-                <a  class="navbar-brand p-2"
-                    style="font-family: monospace, monospace;
-                        color: white;"
-                    onMouseOver="this.style.color='gray'"
-                    onMouseOut="this.style.color='white'"
-                    href="#">Gestion de Usuarios</a>
-                <a  class="navbar-brand p-2 nav-link"
-                    style="font-family: monospace, monospace;
-                        color: white;" 
-                    onMouseOver="this.style.color='gray'"
-                    onMouseOut="this.style.color='white'" 
-                    href="#">Gestion de Productos</a>
+        <nav class="navbar navbar-light bg-dark text-center">
+            <div class="d-flex row align-items-center w-100">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-3 d-flex justify-content-start align-items-center">
+                            <a  class="navbar-brand text-white p-2 ms-4 me-2"
+                            style="font-family: monospace, monospace;"
+                            href="#">
+                                <img    src="{% static 'Bootstraplogo.png' %}" 
+                                        width="30" 
+                                        height="30" 
+                                        class="d-inline-block align-top" 
+                                        alt="">TIENDA
+                            </a>
+                        </div>
+                        <div class="col-3 d-flex justify-content-start">
+                            <a  class="navbar-brand p-2 ms-1 me-4"
+                                style="font-family: monospace, monospace;
+                                    color: white;
+                                    font-size: 17px;"
+                                onMouseOver="this.style.color='gray'"
+                                onMouseOut="this.style.color='white'"
+                                href="/gestionUsuarios">Gestion de<br/>Usuarios</a>
+                        </div>
+                        <div class="col-3 d-flex justify-content-start">
+                            <a  class="navbar-brand p-2 ms-4 me-4"
+                                style="font-family: monospace, monospace;
+                                    color: white;
+                                    font-size: 17px;" 
+                                onMouseOver="this.style.color='gray'"
+                                onMouseOut="this.style.color='white'" 
+                                href="#">Gestion de<br/>Productos</a>
+                        </div>
+                    </div>
+                </div>
+                <div  class="col-4">
+                    <div class="row">
+                        <div    class="col-8 text-white" 
+                                style="font-family: monospace, monospace;">
+                            <div class="row">
+                                <h5 style="font-size: 16px;">Bienvenido</h5>
+                            </div>
+                            <div class="row fst-italic">
+                                <h5 style="font-size: 18px;">{{ user.first_name}} {{ user.last_name}}</h5>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex align-items-center justify-content-end">
+                            <a class="btn btn-secondary" href="{% url 'gestion_tienda:cerrarSesion' %}">
+                                <i class="fa-solid fa-right-to-bracket">Salir</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
+        <div    class="mt-5 text-center"
+                style="font-family: monospace, monospace;">
+            <p style="font-size: 30px;
+                font-weight: 800;">Bienvenido a la gestión de la tienda</p>
+            <p style="font-size: 20px;
+            font-weight: 500;">Usa la navbar para las distintas funcionalidades</p>    
+        </div>
     </body>
+</html>

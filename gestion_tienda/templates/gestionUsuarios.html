@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gestion de Usuarios</title>
+        <!--Importo Bootstrap-->
+        <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+                rel="stylesheet" 
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+                crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+                crossorigin="anonymous"></script>     
+        <!--Importo FontAwesome-->
+        <link   rel="stylesheet" 
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+                integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+                crossorigin="anonymous" 
+                referrerpolicy="no-referrer"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark text-center">
+            <div class="d-flex row align-items-center w-100">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-3 d-flex justify-content-start align-items-center">
+                            <a  class="navbar-brand text-white p-2 ms-4 me-2"
+                            style="font-family: monospace, monospace;"
+                            href="#">
+                                <img    src="{% static 'Bootstraplogo.png' %}" 
+                                        width="30" 
+                                        height="30" 
+                                        class="d-inline-block align-top" 
+                                        alt="">TIENDA
+                            </a>
+                        </div>
+                        <div class="col-3 d-flex justify-content-start">
+                            <a  class="navbar-brand p-2 ms-1 me-4"
+                                style="font-family: monospace, monospace;
+                                    color: white;
+                                    font-size: 17px;"
+                                onMouseOver="this.style.color='gray'"
+                                onMouseOut="this.style.color='white'"
+                                href="/gestionUsuarios">Gestión de<br/>Usuarios</a>
+                        </div>
+                        <div class="col-3 d-flex justify-content-start">
+                            <a  class="navbar-brand p-2 ms-4 me-4"
+                                style="font-family: monospace, monospace;
+                                    color: white;
+                                    font-size: 17px;" 
+                                onMouseOver="this.style.color='gray'"
+                                onMouseOut="this.style.color='white'" 
+                                href="#">Gestión de<br/>Productos</a>
+                        </div>
+                    </div>
+                </div>
+                <div    class="col-4">
+                    <div    class="row">
+                        <div    class="col-8 text-white" 
+                                style="font-family: monospace, monospace;">
+                            <div    class="row">
+                                <h5 style="font-size: 16px;">Bienvenido</h5>
+                            </div>
+                            <div    class="row fst-italic">
+                                <h5 style="font-size: 18px;">{{ user.first_name}} {{ user.last_name}}</h5>
+                            </div>
+                        </div>
+                        <div    class="col-4 d-flex align-items-center justify-content-end">
+                            <a  class="btn btn-secondary" href="{% url 'gestion_tienda:cerrarSesion' %}">
+                                <i  class="fa-solid fa-right-to-bracket">Salir</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div    class="mt-5 text-center"
+                style="font-family: monospace, monospace;">
+            <h5 style="font-size: 20px;
+                font-weight: 800;">Gestión de Usuarios</h5>
+        </div>
+        <div class="mt-5 text-center">
+            <button class="btn btn-success" 
+                    data-bs-toggle="modal"
+                    data-bs-target="#nuevoUsuario" 
+                    href="#">
+                <i  class="fa-solid fa-user-plus"
+                    style="font-size: 14px;"> Agregar Usuario</i>
+            </button>
+        </div>
+        <div class="mt-5 container d-flex justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead class="table-dark p-4">
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Fecha de Registro</th>
+                            <th>Ver</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuariosTotales %}
+                            <tr>
+                                <td>{{usuario.first_name}}</td>
+                                <td>{{usuario.last_name}}</td>
+                                <td>{{usuario.id}}</td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.usuario.Fecha_de_ingreso}}</td>
+                                <td class="text-center">
+                                    <a  class="btn btn-info" 
+                                        href="#">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a  class="btn btn-warning" 
+                                        href="#">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a  class="btn btn-danger" 
+                                        href="{% url 'gestion_tienda:eliminarUsuario' usuario.id %}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>     
+    </body>
+</html>
+
+<!--Nuevo Usuario-->
+<div    class="modal fade" 
+        id="nuevoUsuario" 
+        data-bs-backdrop="static" 
+        data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{% url 'gestion_tienda:gestionUsuarios' %}">
+                {% csrf_token %}
+                <div    class="modal-header"
+                        style="font-family: monospace, monospace;">
+                    <h5 class="modal-title ">Crear nuevo usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div    class="modal-body"
+                        style="font-family: monospace, monospace;">
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-5">
+                            <label>Username :</label>
+                            <input  class="form-control" 
+                                    type="text" 
+                                    name="usernameUsuario" 
+                                    required>
+                        </div>
+                        <div class="col-5">
+                            <label>Contraseña :</label>
+                            <input  class="form-control" 
+                                    type="password" 
+                                    name="contraUsuario" 
+                                    required>
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-5">
+                            <label>Nombre :</label>
+                            <input  class="form-control" 
+                                    type="text" 
+                                    name="nombreUsuario" 
+                                    required>
+                        </div>
+                        <div class="col-5">
+                            <label>Apellido :</label>
+                            <input  class="form-control" 
+                                    type="text" 
+                                    name="apellidoUsuario" 
+                                    required>
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-5">
+                            <label>Rol de Usuario :</label>
+                            <select class="form-select" 
+                                    name="rolUsuario">
+                                <option value="Vendedor">Vendedor</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            <label>Email :</label>
+                            <input  class="form-control" 
+                                    type="email" 
+                                    name="emailUsuario" 
+                                    required>
+                        </div>
+                    </div>
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-5">
+                            <label>Nro Celular :</label>
+                            <input  class="form-control" 
+                                    type="text" 
+                                    name="celUsuario" 
+                                    required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
