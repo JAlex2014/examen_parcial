@@ -29,6 +29,7 @@
                             </a>
                         </div>
                         <div class="col-3 d-flex justify-content-start">
+                            {% if user.usuario.Rol_del_usuario == 'Administrador' %}
                             <a  class="navbar-brand p-2 ms-1 me-4"
                                 style="font-family: monospace, monospace;
                                     color: white;
@@ -36,15 +37,18 @@
                                 onMouseOver="this.style.color='gray'"
                                 onMouseOut="this.style.color='white'"
                                 href="/gestionUsuarios">Gestion de<br/>Usuarios</a>
+                            {% endif%}
                         </div>
                         <div class="col-3 d-flex justify-content-start">
+                            {% if user.id %}
                             <a  class="navbar-brand p-2 ms-4 me-4"
                                 style="font-family: monospace, monospace;
                                     color: white;
                                     font-size: 17px;" 
                                 onMouseOver="this.style.color='gray'"
                                 onMouseOut="this.style.color='white'" 
-                                href="#">Gestion de<br/>Productos</a>
+                                href="{% url 'gestion_tienda:gestionProductos' user.id %}">Gestion de<br/>Productos</a>
+                            {% endif%}
                         </div>
                     </div>
                 </div>
@@ -72,12 +76,14 @@
                 style="font-family: monospace, monospace;">
             <img    class="text-center" 
                     src="{% static 'FondoTienda.jpg' %}"
-                    style=" width: 100vw;
-                        height: 125%;
+                    style="width: 100%;
+                        height: 95vh;
                         position: absolute;
                         left:0;
                         background-size: cover;"> </div>   
-            <div   class="mt-3 text-center" style="position: relative;font-family: monospace, monospace;">
+            <div    class="mt-2 text-center" 
+                    style="position: relative;
+                        font-family: monospace, monospace;">
                 <p style="font-size: 30px;
                     font-weight: 800;">Bienvenido a la gestión de la tienda</p>
                 <p style="font-size: 20px;
